@@ -9,6 +9,7 @@ const KeyMine = '47125427-ad9e927b7d4f8d8b2ea4266bf';
 let currentQuery; 
 let currentPage;
 
+const itemsPerPage = 15;
 
 
 
@@ -32,7 +33,7 @@ function getPhotos() {
         orientation: 'horizontal',
         safesearch: 'true',
         page: currentPage,
-        per_page: 15,
+        per_page: itemsPerPage,
     }});
     return promPixbay
 }
@@ -40,6 +41,11 @@ function getPhotos() {
 export async function loadMore(){
     currentPage++;
     return getPhotos();
+}
+
+
+export function canLoadMore(totalHits) {
+    return totalHits - itemsPerPage * currentPage > 0 
 }
 
 
